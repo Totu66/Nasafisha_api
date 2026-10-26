@@ -1,0 +1,90 @@
+Nasafisha_api/
+├── docker-compose.yml
+├── dockerfile
+├── .env
+├── .eslintrc.js
+├── folder_structure.txt
+├── .gitignore
+├── instructions.text
+├── nest-cli.json
+├── package.json
+├── .prettierrc
+├── prisma
+│   ├── generated
+│   │   ├── browser.ts
+│   │   ├── client.ts
+│   │   ├── commonInputTypes.ts
+│   │   ├── enums.ts
+│   │   ├── internal
+│   │   │   ├── class.ts
+│   │   │   ├── prismaNamespaceBrowser.ts
+│   │   │   └── prismaNamespace.ts
+│   │   ├── models
+│   │   │   ├── Bookmark.ts
+│   │   │   └── User.ts
+│   │   └── models.ts
+│   ├── migrations
+│   │   ├── 20230910102554_init3
+│   │   │   └── migration.sql
+│   │   ├── 20260122164926_migration002_changed_id_to_uuid
+│   │   │   └── migration.sql
+│   │   └── migration_lock.toml
+│   ├── schema.prisma
+│   └── seed
+│       └── seed.ts
+├── prisma.config.ts
+├── README.md
+├── requirements.txt
+├── src
+│   ├── app.controller.ts
+│   ├── app.module.ts
+│   ├── auth
+│   │   ├── auth.controller.ts
+│   │   ├── auth-dto
+│   │   │   ├── auth.dto.ts
+│   │   │   └── index.ts
+│   │   ├── auth.module.ts
+│   │   ├── auth.service.ts
+│   │   ├── decorator
+│   │   │   ├── get-user.decorator.ts
+│   │   │   └── index.ts
+│   │   ├── guard
+│   │   │   ├── index.ts
+│   │   │   ├── jwt.guard.ts
+│   │   │   └── supabase.guard.ts
+│   │   └── strategy
+│   │       ├── index.ts
+│   │       └── jwt.strategy.ts
+│   ├── bookmark
+│   │   ├── bookmark.controller.ts
+│   │   ├── bookmark.module.ts
+│   │   └── bookmark.service.ts
+│   ├── common
+│   │   ├── dto
+│   │   │   ├── bookmark.dto.ts
+│   │   │   ├── bookmarkPatch.dto.ts
+│   │   │   ├── index.ts
+│   │   │   └── model.dto.ts
+│   │   └── helpers
+│   │       └── modelSelect.ts
+│   ├── main.ts
+│   ├── prisma
+│   │   ├── prisma.module.ts
+│   │   └── prisma.service.ts
+│   ├── supabase
+│   │   ├── supabase.module.ts
+│   │   └── supabase.service.ts
+│   ├── test
+│   │   ├── test.controller.ts
+│   │   └── test.module.ts
+│   └── user
+│       ├── user.controller.ts
+│       └── user.module.ts
+├── test
+│   ├── app.e2e-spec.ts
+│   └── jest-e2e.json
+├── tsconfig.build.json
+├── tsconfig.json
+└── zoldCodes
+    ├── package-modified.json.txt
+    └── package-old.json.txt

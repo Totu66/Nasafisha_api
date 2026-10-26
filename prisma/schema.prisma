@@ -42,3 +42,359 @@ model Bookmark {
 
   // @@map("bookmarks")
 }
+
+model Account {
+  id             String    @id @default(uuid())
+  role           String
+  language       String    @default("en")
+  name           String
+  phone          String?   @unique
+  employeeId     String?   @unique
+  email          String?   @unique
+  pinHash        String?
+  passwordHash   String?
+  crewLabel      String?
+  zone           String?
+  isActive       Boolean   @default(true)
+  failedPinCount Int       @default(0)
+  lockedAt       DateTime?
+  createdAt      DateTime  @default(now())
+  updatedAt      DateTime  @updatedAt
+
+  @@map("accounts")
+}
+
+model InAppNotification {
+  id        String    @id @default(uuid())
+  citizenId String
+  reference String
+  kind      String
+  message   String
+  readAt    DateTime?
+  createdAt DateTime  @default(now())
+
+  @@index([citizenId, createdAt])
+  @@map("in_app_notifications")
+}
+
+model SmsLog {
+  id        String   @id @default(uuid())
+  reportId  String
+  kind      String
+  lang      String
+  status    String
+  error     String?
+  createdAt DateTime @default(now())
+
+  @@index([reportId, createdAt])
+  @@map("sms_logs")
+}
+
+model TrackingLink {
+  id        String   @id @default(uuid())
+  reportId  String   @unique
+  code      String   @unique
+  expiresAt DateTime
+  createdAt DateTime @default(now())
+
+  @@index([expiresAt])
+  @@map("tracking_links")
+}
+
+model PhoneOtp {
+  phone          String   @id
+  codeHash       String
+  expiresAt      DateTime
+  failedAttempts Int      @default(0)
+  lockedUntil    DateTime?
+  updatedAt      DateTime @updatedAt
+
+  @@map("phone_otps")
+}
+
+model AuditLog {
+  id        String   @id @default(uuid())
+  action    String
+  actorId   String?
+  targetId  String?
+  detail    String?
+  createdAt DateTime @default(now())
+
+  @@index([action, createdAt])
+  @@map("audit_logs")
+}
+
+model SupervisorNotice {
+  id        String    @id @default(uuid())
+  accountId String
+  zone      String?
+  message   String
+  readAt    DateTime?
+  createdAt DateTime  @default(now())
+
+  @@map("supervisor_notices")
+}
+
+model Incident {
+  id           String   @id @default(uuid())
+  issueType    String
+  lat          Float
+  lng          Float
+  zone         String   @default("Unassigned")
+  citizenCount Int      @default(1)
+  status       String   @default("open")
+  createdAt    DateTime @default(now())
+  reports      Report[]
+  ticket       Ticket?
+
+  @@index([status, issueType, createdAt])
+  @@map("incidents")
+}
+
+model Report {
+  id            String      @id @default(uuid())
+  reference     String      @unique
+  citizenId     String
+  incidentId    String
+  incident      Incident    @relation(fields: [incidentId], references: [id])
+  issueType     String
+  photoKey      String
+  lat           Float
+  lng           Float
+  capturedAt    DateTime
+  note          String?
+  status        String      @default("submitted")
+  dumpingSiteId String?
+  dumpingSite   DumpingSite? @relation(fields: [dumpingSiteId], references: [id])
+  createdAt     DateTime    @default(now())
+
+  @@index([citizenId, createdAt])
+  @@index([incidentId])
+  @@index([dumpingSiteId, createdAt])
+  @@map("reports")
+}
+
+model Ticket {
+  id               String            @id @default(uuid())
+  incidentId       String            @unique
+  incident         Incident          @relation(fields: [incidentId], references: [id])
+  crewId           String?
+  status           String            @default("open")
+  afterPhotoKey    String?
+  closureLat       Float?
+  closureLng       Float?
+  closureDistance  Int?
+  overrideFlag     Boolean           @default(false)
+  closedAt         DateTime?
+  createdAt        DateTime          @default(now())
+  events           TicketEvent[]
+  approvals        ClosureApproval[]
+
+  @@index([crewId, status])
+  @@map("tickets")
+}
+
+model TicketEvent {
+  id        String   @id @default(uuid())
+  ticketId  String
+  ticket    Ticket   @relation(fields: [ticketId], references: [id])
+  kind      String
+  actorName String
+  detail    String?
+  createdAt DateTime @default(now())
+
+  @@index([ticketId, createdAt])
+  @@map("ticket_events")
+}
+
+model ClosureApproval {
+  id             String   @id @default(uuid())
+  ticketId       String
+  ticket         Ticket   @relation(fields: [ticketId], references: [id])
+  requestedById  String
+  distanceMeters Int
+  afterPhotoKey  String
+  afterLat       Float
+  afterLng       Float
+  capturedAt     DateTime
+  status         String   @default("pending")
+  decidedById    String?
+  decidedAt      DateTime?
+  createdAt      DateTime @default(now())
+
+  @@index([status])
+  @@map("closure_approvals")
+}
+
+model DumpingSite {
+  id             String                @id @default(uuid())
+  lat            Float
+  lng            Float
+  name           String?
+  reportCount    Int                   @default(0)
+  hotspot        Boolean               @default(false)
+  lastReportedAt DateTime?
+  createdAt      DateTime              @default(now())
+  reports        Report[]
+  remediations   DumpingRemediation[]
+
+  @@map("dumping_sites")
+}
+
+model DumpingRemediation {
+  id        String      @id @default(uuid())
+  siteId    String
+  site      DumpingSite @relation(fields: [siteId], references: [id])
+  note      String
+  byName    String
+  createdAt DateTime    @default(now())
+
+  @@map("dumping_remediations")
+}
+
+model Vehicle {
+  id             String        @id @default(uuid())
+  plate          String        @unique
+  deviceId       String        @unique
+  crewId         String?
+  zone           String?
+  status         String        @default("idle")
+  lastLat        Float?
+  lastLng        Float?
+  lastSpeed      Float?
+  lastReportedAt DateTime?
+  isStale        Boolean       @default(false)
+  staleAckedAt   DateTime?
+  offRouteSince  DateTime?
+  createdAt      DateTime      @default(now())
+  updatedAt      DateTime      @updatedAt
+
+  routes      Route[]
+  alerts      DeviationAlert[]
+  positionLog PositionLog[]
+
+  @@map("vehicles")
+}
+
+model PositionLog {
+  id        String   @id @default(uuid())
+  vehicleId String
+  vehicle   Vehicle  @relation(fields: [vehicleId], references: [id])
+  lat       Float
+  lng       Float
+  speed     Float?
+  recordedAt DateTime
+  createdAt DateTime @default(now())
+
+  @@index([vehicleId, recordedAt])
+  @@map("position_logs")
+}
+
+model RejectedPosition {
+  id        String   @id @default(uuid())
+  reason    String
+  raw       String?
+  createdAt DateTime @default(now())
+
+  @@map("rejected_positions")
+}
+
+model Route {
+  id              String        @id @default(uuid())
+  vehicleId       String
+  vehicle         Vehicle       @relation(fields: [vehicleId], references: [id])
+  zone            String?
+  shiftStart      DateTime
+  shiftEnd        DateTime
+  plannedPath     Json
+  plannedMinutes  Int           @default(0)
+  thresholdMeters Int           @default(50)
+  thresholdMinutes Int          @default(10)
+  audited         Boolean       @default(false)
+  createdAt       DateTime      @default(now())
+
+  alerts RouteAudit[]
+  audits DeviationAlert[]
+
+  @@index([vehicleId, shiftStart])
+  @@map("routes")
+}
+
+model DeviationAlert {
+  id             String    @id @default(uuid())
+  vehicleId      String
+  vehicle        Vehicle   @relation(fields: [vehicleId], references: [id])
+  routeId        String
+  route          Route     @relation(fields: [routeId], references: [id])
+  distanceMeters Int       @default(0)
+  minutesOff     Int       @default(0)
+  status         String    @default("open")
+  closedAt       DateTime?
+  authorisedById String?
+  flaggedAt      DateTime  @default(now())
+
+  @@index([routeId, status])
+  @@map("deviation_alerts")
+}
+
+model RouteAudit {
+  id              String   @id @default(uuid())
+  routeId         String
+  route           Route    @relation(fields: [routeId], references: [id])
+  vehicleId       String
+  plannedMeters   Int
+  actualMeters    Int
+  varianceMeters  Int
+  plannedMinutes  Int
+  actualMinutes   Int
+  varianceMinutes Int
+  auditedAt       DateTime @default(now())
+
+  @@index([vehicleId, auditedAt])
+  @@map("route_audits")
+}
+
+model EfficiencyIndex {
+  id               String   @id @default(uuid())
+  zone             String
+  date             DateTime
+  score            Int      @default(0)
+  collectionRate   Float?
+  avgResolutionHours Float?
+  routeAdherence   Int?
+  ticketsOpened    Int      @default(0)
+  missedIncidents  Int      @default(0)
+  createdAt        DateTime @default(now())
+
+  @@unique([zone, date])
+  @@map("efficiency_index")
+}
+
+model SyncedAction {
+  id        String    @id @default(uuid())
+  actionId  String
+  userId    String
+  action    String
+  payload   Json
+  status    String    @default("queued")
+  reason    String?
+  createdAt DateTime  @default(now())
+  syncedAt  DateTime?
+
+  @@unique([actionId, userId])
+  @@index([userId, status, createdAt])
+  @@map("synced_actions")
+}
+
+model SyncConflict {
+  id        String   @id @default(uuid())
+  actionId  String
+  userId    String
+  type      String
+  payload   Json
+  reason    String
+  createdAt DateTime @default(now())
+
+  @@index([userId, createdAt])
+  @@map("sync_conflicts")
+}

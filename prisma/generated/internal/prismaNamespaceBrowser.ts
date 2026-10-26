@@ -52,7 +52,30 @@ export const AnyNull = runtime.AnyNull
 
 export const ModelName = {
   User: 'User',
-  Bookmark: 'Bookmark'
+  Bookmark: 'Bookmark',
+  Account: 'Account',
+  InAppNotification: 'InAppNotification',
+  SmsLog: 'SmsLog',
+  TrackingLink: 'TrackingLink',
+  PhoneOtp: 'PhoneOtp',
+  AuditLog: 'AuditLog',
+  SupervisorNotice: 'SupervisorNotice',
+  Incident: 'Incident',
+  Report: 'Report',
+  Ticket: 'Ticket',
+  TicketEvent: 'TicketEvent',
+  ClosureApproval: 'ClosureApproval',
+  DumpingSite: 'DumpingSite',
+  DumpingRemediation: 'DumpingRemediation',
+  Vehicle: 'Vehicle',
+  PositionLog: 'PositionLog',
+  RejectedPosition: 'RejectedPosition',
+  Route: 'Route',
+  DeviationAlert: 'DeviationAlert',
+  RouteAudit: 'RouteAudit',
+  EfficiencyIndex: 'EfficiencyIndex',
+  SyncedAction: 'SyncedAction',
+  SyncConflict: 'SyncConflict'
 } as const
 
 export type ModelName = (typeof ModelName)[keyof typeof ModelName]
@@ -97,12 +120,355 @@ export const BookmarkScalarFieldEnum = {
 export type BookmarkScalarFieldEnum = (typeof BookmarkScalarFieldEnum)[keyof typeof BookmarkScalarFieldEnum]
 
 
+export const AccountScalarFieldEnum = {
+  id: 'id',
+  role: 'role',
+  language: 'language',
+  name: 'name',
+  phone: 'phone',
+  employeeId: 'employeeId',
+  email: 'email',
+  pinHash: 'pinHash',
+  passwordHash: 'passwordHash',
+  crewLabel: 'crewLabel',
+  zone: 'zone',
+  isActive: 'isActive',
+  failedPinCount: 'failedPinCount',
+  lockedAt: 'lockedAt',
+  createdAt: 'createdAt',
+  updatedAt: 'updatedAt'
+} as const
+
+export type AccountScalarFieldEnum = (typeof AccountScalarFieldEnum)[keyof typeof AccountScalarFieldEnum]
+
+
+export const InAppNotificationScalarFieldEnum = {
+  id: 'id',
+  citizenId: 'citizenId',
+  reference: 'reference',
+  kind: 'kind',
+  message: 'message',
+  readAt: 'readAt',
+  createdAt: 'createdAt'
+} as const
+
+export type InAppNotificationScalarFieldEnum = (typeof InAppNotificationScalarFieldEnum)[keyof typeof InAppNotificationScalarFieldEnum]
+
+
+export const SmsLogScalarFieldEnum = {
+  id: 'id',
+  reportId: 'reportId',
+  kind: 'kind',
+  lang: 'lang',
+  status: 'status',
+  error: 'error',
+  createdAt: 'createdAt'
+} as const
+
+export type SmsLogScalarFieldEnum = (typeof SmsLogScalarFieldEnum)[keyof typeof SmsLogScalarFieldEnum]
+
+
+export const TrackingLinkScalarFieldEnum = {
+  id: 'id',
+  reportId: 'reportId',
+  code: 'code',
+  expiresAt: 'expiresAt',
+  createdAt: 'createdAt'
+} as const
+
+export type TrackingLinkScalarFieldEnum = (typeof TrackingLinkScalarFieldEnum)[keyof typeof TrackingLinkScalarFieldEnum]
+
+
+export const PhoneOtpScalarFieldEnum = {
+  phone: 'phone',
+  codeHash: 'codeHash',
+  expiresAt: 'expiresAt',
+  failedAttempts: 'failedAttempts',
+  lockedUntil: 'lockedUntil',
+  updatedAt: 'updatedAt'
+} as const
+
+export type PhoneOtpScalarFieldEnum = (typeof PhoneOtpScalarFieldEnum)[keyof typeof PhoneOtpScalarFieldEnum]
+
+
+export const AuditLogScalarFieldEnum = {
+  id: 'id',
+  action: 'action',
+  actorId: 'actorId',
+  targetId: 'targetId',
+  detail: 'detail',
+  createdAt: 'createdAt'
+} as const
+
+export type AuditLogScalarFieldEnum = (typeof AuditLogScalarFieldEnum)[keyof typeof AuditLogScalarFieldEnum]
+
+
+export const SupervisorNoticeScalarFieldEnum = {
+  id: 'id',
+  accountId: 'accountId',
+  zone: 'zone',
+  message: 'message',
+  readAt: 'readAt',
+  createdAt: 'createdAt'
+} as const
+
+export type SupervisorNoticeScalarFieldEnum = (typeof SupervisorNoticeScalarFieldEnum)[keyof typeof SupervisorNoticeScalarFieldEnum]
+
+
+export const IncidentScalarFieldEnum = {
+  id: 'id',
+  issueType: 'issueType',
+  lat: 'lat',
+  lng: 'lng',
+  zone: 'zone',
+  citizenCount: 'citizenCount',
+  status: 'status',
+  createdAt: 'createdAt'
+} as const
+
+export type IncidentScalarFieldEnum = (typeof IncidentScalarFieldEnum)[keyof typeof IncidentScalarFieldEnum]
+
+
+export const ReportScalarFieldEnum = {
+  id: 'id',
+  reference: 'reference',
+  citizenId: 'citizenId',
+  incidentId: 'incidentId',
+  issueType: 'issueType',
+  photoKey: 'photoKey',
+  lat: 'lat',
+  lng: 'lng',
+  capturedAt: 'capturedAt',
+  note: 'note',
+  status: 'status',
+  dumpingSiteId: 'dumpingSiteId',
+  createdAt: 'createdAt'
+} as const
+
+export type ReportScalarFieldEnum = (typeof ReportScalarFieldEnum)[keyof typeof ReportScalarFieldEnum]
+
+
+export const TicketScalarFieldEnum = {
+  id: 'id',
+  incidentId: 'incidentId',
+  crewId: 'crewId',
+  status: 'status',
+  afterPhotoKey: 'afterPhotoKey',
+  closureLat: 'closureLat',
+  closureLng: 'closureLng',
+  closureDistance: 'closureDistance',
+  overrideFlag: 'overrideFlag',
+  closedAt: 'closedAt',
+  createdAt: 'createdAt'
+} as const
+
+export type TicketScalarFieldEnum = (typeof TicketScalarFieldEnum)[keyof typeof TicketScalarFieldEnum]
+
+
+export const TicketEventScalarFieldEnum = {
+  id: 'id',
+  ticketId: 'ticketId',
+  kind: 'kind',
+  actorName: 'actorName',
+  detail: 'detail',
+  createdAt: 'createdAt'
+} as const
+
+export type TicketEventScalarFieldEnum = (typeof TicketEventScalarFieldEnum)[keyof typeof TicketEventScalarFieldEnum]
+
+
+export const ClosureApprovalScalarFieldEnum = {
+  id: 'id',
+  ticketId: 'ticketId',
+  requestedById: 'requestedById',
+  distanceMeters: 'distanceMeters',
+  afterPhotoKey: 'afterPhotoKey',
+  afterLat: 'afterLat',
+  afterLng: 'afterLng',
+  capturedAt: 'capturedAt',
+  status: 'status',
+  decidedById: 'decidedById',
+  decidedAt: 'decidedAt',
+  createdAt: 'createdAt'
+} as const
+
+export type ClosureApprovalScalarFieldEnum = (typeof ClosureApprovalScalarFieldEnum)[keyof typeof ClosureApprovalScalarFieldEnum]
+
+
+export const DumpingSiteScalarFieldEnum = {
+  id: 'id',
+  lat: 'lat',
+  lng: 'lng',
+  name: 'name',
+  reportCount: 'reportCount',
+  hotspot: 'hotspot',
+  lastReportedAt: 'lastReportedAt',
+  createdAt: 'createdAt'
+} as const
+
+export type DumpingSiteScalarFieldEnum = (typeof DumpingSiteScalarFieldEnum)[keyof typeof DumpingSiteScalarFieldEnum]
+
+
+export const DumpingRemediationScalarFieldEnum = {
+  id: 'id',
+  siteId: 'siteId',
+  note: 'note',
+  byName: 'byName',
+  createdAt: 'createdAt'
+} as const
+
+export type DumpingRemediationScalarFieldEnum = (typeof DumpingRemediationScalarFieldEnum)[keyof typeof DumpingRemediationScalarFieldEnum]
+
+
+export const VehicleScalarFieldEnum = {
+  id: 'id',
+  plate: 'plate',
+  deviceId: 'deviceId',
+  crewId: 'crewId',
+  zone: 'zone',
+  status: 'status',
+  lastLat: 'lastLat',
+  lastLng: 'lastLng',
+  lastSpeed: 'lastSpeed',
+  lastReportedAt: 'lastReportedAt',
+  isStale: 'isStale',
+  staleAckedAt: 'staleAckedAt',
+  offRouteSince: 'offRouteSince',
+  createdAt: 'createdAt',
+  updatedAt: 'updatedAt'
+} as const
+
+export type VehicleScalarFieldEnum = (typeof VehicleScalarFieldEnum)[keyof typeof VehicleScalarFieldEnum]
+
+
+export const PositionLogScalarFieldEnum = {
+  id: 'id',
+  vehicleId: 'vehicleId',
+  lat: 'lat',
+  lng: 'lng',
+  speed: 'speed',
+  recordedAt: 'recordedAt',
+  createdAt: 'createdAt'
+} as const
+
+export type PositionLogScalarFieldEnum = (typeof PositionLogScalarFieldEnum)[keyof typeof PositionLogScalarFieldEnum]
+
+
+export const RejectedPositionScalarFieldEnum = {
+  id: 'id',
+  reason: 'reason',
+  raw: 'raw',
+  createdAt: 'createdAt'
+} as const
+
+export type RejectedPositionScalarFieldEnum = (typeof RejectedPositionScalarFieldEnum)[keyof typeof RejectedPositionScalarFieldEnum]
+
+
+export const RouteScalarFieldEnum = {
+  id: 'id',
+  vehicleId: 'vehicleId',
+  zone: 'zone',
+  shiftStart: 'shiftStart',
+  shiftEnd: 'shiftEnd',
+  plannedPath: 'plannedPath',
+  plannedMinutes: 'plannedMinutes',
+  thresholdMeters: 'thresholdMeters',
+  thresholdMinutes: 'thresholdMinutes',
+  audited: 'audited',
+  createdAt: 'createdAt'
+} as const
+
+export type RouteScalarFieldEnum = (typeof RouteScalarFieldEnum)[keyof typeof RouteScalarFieldEnum]
+
+
+export const DeviationAlertScalarFieldEnum = {
+  id: 'id',
+  vehicleId: 'vehicleId',
+  routeId: 'routeId',
+  distanceMeters: 'distanceMeters',
+  minutesOff: 'minutesOff',
+  status: 'status',
+  closedAt: 'closedAt',
+  authorisedById: 'authorisedById',
+  flaggedAt: 'flaggedAt'
+} as const
+
+export type DeviationAlertScalarFieldEnum = (typeof DeviationAlertScalarFieldEnum)[keyof typeof DeviationAlertScalarFieldEnum]
+
+
+export const RouteAuditScalarFieldEnum = {
+  id: 'id',
+  routeId: 'routeId',
+  vehicleId: 'vehicleId',
+  plannedMeters: 'plannedMeters',
+  actualMeters: 'actualMeters',
+  varianceMeters: 'varianceMeters',
+  plannedMinutes: 'plannedMinutes',
+  actualMinutes: 'actualMinutes',
+  varianceMinutes: 'varianceMinutes',
+  auditedAt: 'auditedAt'
+} as const
+
+export type RouteAuditScalarFieldEnum = (typeof RouteAuditScalarFieldEnum)[keyof typeof RouteAuditScalarFieldEnum]
+
+
+export const EfficiencyIndexScalarFieldEnum = {
+  id: 'id',
+  zone: 'zone',
+  date: 'date',
+  score: 'score',
+  collectionRate: 'collectionRate',
+  avgResolutionHours: 'avgResolutionHours',
+  routeAdherence: 'routeAdherence',
+  ticketsOpened: 'ticketsOpened',
+  missedIncidents: 'missedIncidents',
+  createdAt: 'createdAt'
+} as const
+
+export type EfficiencyIndexScalarFieldEnum = (typeof EfficiencyIndexScalarFieldEnum)[keyof typeof EfficiencyIndexScalarFieldEnum]
+
+
+export const SyncedActionScalarFieldEnum = {
+  id: 'id',
+  actionId: 'actionId',
+  userId: 'userId',
+  action: 'action',
+  payload: 'payload',
+  status: 'status',
+  reason: 'reason',
+  createdAt: 'createdAt',
+  syncedAt: 'syncedAt'
+} as const
+
+export type SyncedActionScalarFieldEnum = (typeof SyncedActionScalarFieldEnum)[keyof typeof SyncedActionScalarFieldEnum]
+
+
+export const SyncConflictScalarFieldEnum = {
+  id: 'id',
+  actionId: 'actionId',
+  userId: 'userId',
+  type: 'type',
+  payload: 'payload',
+  reason: 'reason',
+  createdAt: 'createdAt'
+} as const
+
+export type SyncConflictScalarFieldEnum = (typeof SyncConflictScalarFieldEnum)[keyof typeof SyncConflictScalarFieldEnum]
+
+
 export const SortOrder = {
   asc: 'asc',
   desc: 'desc'
 } as const
 
 export type SortOrder = (typeof SortOrder)[keyof typeof SortOrder]
+
+
+export const JsonNullValueInput = {
+  JsonNull: JsonNull
+} as const
+
+export type JsonNullValueInput = (typeof JsonNullValueInput)[keyof typeof JsonNullValueInput]
 
 
 export const QueryMode = {
@@ -119,4 +485,13 @@ export const NullsOrder = {
 } as const
 
 export type NullsOrder = (typeof NullsOrder)[keyof typeof NullsOrder]
+
+
+export const JsonNullValueFilter = {
+  DbNull: DbNull,
+  JsonNull: JsonNull,
+  AnyNull: AnyNull
+} as const
+
+export type JsonNullValueFilter = (typeof JsonNullValueFilter)[keyof typeof JsonNullValueFilter]
 

@@ -27,3 +27,118 @@ export type User = Prisma.UserModel
  * 
  */
 export type Bookmark = Prisma.BookmarkModel
+/**
+ * Model Account
+ * 
+ */
+export type Account = Prisma.AccountModel
+/**
+ * Model InAppNotification
+ * 
+ */
+export type InAppNotification = Prisma.InAppNotificationModel
+/**
+ * Model SmsLog
+ * 
+ */
+export type SmsLog = Prisma.SmsLogModel
+/**
+ * Model TrackingLink
+ * 
+ */
+export type TrackingLink = Prisma.TrackingLinkModel
+/**
+ * Model PhoneOtp
+ * 
+ */
+export type PhoneOtp = Prisma.PhoneOtpModel
+/**
+ * Model AuditLog
+ * 
+ */
+export type AuditLog = Prisma.AuditLogModel
+/**
+ * Model SupervisorNotice
+ * 
+ */
+export type SupervisorNotice = Prisma.SupervisorNoticeModel
+/**
+ * Model Incident
+ * 
+ */
+export type Incident = Prisma.IncidentModel
+/**
+ * Model Report
+ * 
+ */
+export type Report = Prisma.ReportModel
+/**
+ * Model Ticket
+ * 
+ */
+export type Ticket = Prisma.TicketModel
+/**
+ * Model TicketEvent
+ * 
+ */
+export type TicketEvent = Prisma.TicketEventModel
+/**
+ * Model ClosureApproval
+ * 
+ */
+export type ClosureApproval = Prisma.ClosureApprovalModel
+/**
+ * Model DumpingSite
+ * 
+ */
+export type DumpingSite = Prisma.DumpingSiteModel
+/**
+ * Model DumpingRemediation
+ * 
+ */
+export type DumpingRemediation = Prisma.DumpingRemediationModel
+/**
+ * Model Vehicle
+ * 
+ */
+export type Vehicle = Prisma.VehicleModel
+/**
+ * Model PositionLog
+ * 
+ */
+export type PositionLog = Prisma.PositionLogModel
+/**
+ * Model RejectedPosition
+ * 
+ */
+export type RejectedPosition = Prisma.RejectedPositionModel
+/**
+ * Model Route
+ * 
+ */
+export type Route = Prisma.RouteModel
+/**
+ * Model DeviationAlert
+ * 
+ */
+export type DeviationAlert = Prisma.DeviationAlertModel
+/**
+ * Model RouteAudit
+ * 
+ */
+export type RouteAudit = Prisma.RouteAuditModel
+/**
+ * Model EfficiencyIndex
+ * 
+ */
+export type EfficiencyIndex = Prisma.EfficiencyIndexModel
+/**
+ * Model SyncedAction
+ * 
+ */
+export type SyncedAction = Prisma.SyncedActionModel
+/**
+ * Model SyncConflict
+ * 
+ */
+export type SyncConflict = Prisma.SyncConflictModel

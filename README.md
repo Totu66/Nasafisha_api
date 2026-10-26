@@ -26,6 +26,37 @@
 
 [Nest](https://github.com/nestjs/nest) framework TypeScript starter repository.
 
+## Access API
+
+The access feature is isolated in `src/access/`; the existing email/password
+auth, bookmark, and user routes are unchanged. It adds citizen OTP routes,
+crew PIN login, and supervisor crew-PIN reset routes:
+
+- `POST /auth/otp/request`
+- `POST /auth/otp/verify`
+- `POST /auth/crew/login`
+- `GET /supervisor/crew-accounts` (field supervisor token required)
+- `POST /supervisor/crew-accounts/:id/pin` (field supervisor token required)
+
+Copy `.env.example` to `.env` as a reference, then supply a unique, strong
+`JWT_SECRET` and the database/SMS settings for the environment. `JWT_SECRET`
+is also used by the existing auth feature, so changing it invalidates existing
+JWTs. Do not use a placeholder or share a secret between deployments. When
+`SMS_API_KEY` is unset outside production, OTP messages are written to the
+server log for local testing; production requires SMS configuration.
+OTP request throttling is not included yet and should be added before exposing
+the endpoint publicly.
+
+The access schema additions are in `prisma/schema.prisma`, with an additive
+migration at `prisma/migrations/20261014120000_add_access_models`. Review and
+apply it to the intended database using `npx prisma migrate deploy`, then
+regenerate the Prisma client with `npx prisma generate`. The migration has not
+been applied automatically.
+
+The optional access test seed uses a known development PIN. It refuses to run
+unless `ALLOW_ACCESS_TEST_SEED=true` is set and `NODE_ENV` is not production.
+Never point it at a production database.
+
 ## Installation
 
 ```bash
