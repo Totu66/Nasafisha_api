@@ -1,4 +1,4 @@
-import { Body, Controller, HttpCode, Param, Post } from '@nestjs/common';
+import { Body, Controller, Get, HttpCode, Param, Post } from '@nestjs/common';
 import { CurrentUser, RequireRole } from '../access/access.decorators';
 import { ROLES } from '../access/roles';
 import type { SessionUser } from '../access/token.service';
@@ -13,6 +13,19 @@ export class AdminAuthController {
   @HttpCode(200)
   login(@Body() dto: AdminLoginDto) {
     return this.auth.login(dto.email, dto.password, dto.deviceId);
+  }
+
+  @Get('auth/me')
+  @RequireRole(
+    ROLES.CITIZEN,
+    ROLES.FIELD_CREW,
+    ROLES.FIELD_SUPERVISOR,
+    ROLES.OPERATIONS_MANAGER,
+    ROLES.EXECUTIVE,
+    ROLES.COUNTY_ICT_ADMIN,
+  )
+  me(@CurrentUser() user: SessionUser) {
+    return user;
   }
 
   @Post('admin/accounts/:id/unlock')

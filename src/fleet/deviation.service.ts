@@ -95,13 +95,16 @@ export class DeviationService {
 
       return {
         id: a.id,
+        vehicleId: a.vehicleId,
         crewLabel: c?.crewLabel ?? c?.name ?? '',
         vehiclePlate: a.vehicle.plate,
+        zone: a.route.zone,
         distanceMeters: a.distanceMeters,
         minutesOff: a.minutesOff,
         thresholdMeters: a.route.thresholdMeters,
         thresholdMinutes: a.route.thresholdMinutes,
         status: a.status,
+        raisedAt: a.flaggedAt,
       };
     });
   }

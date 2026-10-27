@@ -3,6 +3,7 @@ import {
   IsNotEmpty,
   IsOptional,
   IsString,
+  MaxLength,
   Matches,
 } from 'class-validator';
 
@@ -18,6 +19,11 @@ export class VerifyOtpDto {
   @IsString()
   @Matches(/^\d{6}$/, { message: 'The code has 6 digits' })
   code: string;
+
+  @IsOptional()
+  @IsString()
+  @MaxLength(120)
+  name?: string;
 }
 
 export class CrewLoginDto {

@@ -15,6 +15,6 @@ export class CitizenController {
   @Post('verify')
   @HttpCode(200)
   verify(@Body() dto: VerifyOtpDto) {
-    return this.citizen.verifyOtp(dto.email, dto.code);
+    return this.citizen.verifyOtp(dto.email, dto.code, dto.name);
   }
 }

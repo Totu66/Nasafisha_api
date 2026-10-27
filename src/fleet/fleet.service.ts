@@ -10,6 +10,7 @@ import { RouteAuditService } from './route-audit.service';
 interface VehicleRow {
   id: string;
   plate: string;
+  zone: string | null;
   crewId: string | null;
   status: string;
   isStale: boolean;
@@ -53,6 +54,7 @@ export class FleetService {
       return {
         id: v.id,
         plate: v.plate,
+        zone: v.zone ?? 'Unassigned',
         crewLabel: c?.crewLabel ?? c?.name ?? '',
         lat: v.lastLat,
         lng: v.lastLng,

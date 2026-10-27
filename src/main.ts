@@ -16,8 +16,13 @@ async function bootstrap() {
     }),
   );
 
-  /**List allowed origins here */
-  const allowedOrigins = ['*'];
+  const allowedOrigins = (
+    process.env.CORS_ORIGINS ??
+    'http://localhost:5173,http://127.0.0.1:5173'
+  )
+    .split(',')
+    .map((origin) => origin.trim())
+    .filter(Boolean);
 
   /**Enable CORS */
   app.enableCors({

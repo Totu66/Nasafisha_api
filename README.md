@@ -35,6 +35,7 @@ supervisor crew-PIN reset routes:
 
 - `POST /auth/otp/request`
 - `POST /auth/otp/verify`
+- `GET /auth/me` (validates and returns the signed-in access session)
 - `POST /auth/crew/login`
 - `GET /supervisor/crew-accounts` (field supervisor token required)
 - `POST /supervisor/crew-accounts/:id/pin` (field supervisor token required)
@@ -51,12 +52,22 @@ Verification also requires the six-digit code sent by Supabase:
 { "email": "resident@example.com", "code": "123456" }
 ```
 
+Registration may also supply a display name during verification:
+
+```json
+{ "email": "resident@example.com", "code": "123456", "name": "Resident Name" }
+```
+
 Copy `.env.example` to `.env` as a reference, then supply a unique, strong
 `JWT_SECRET`, `DATABASE_URL`, `SUPABASE_URL`, and Supabase key. Citizen OTP
 sign-in uses Supabase Auth; enable email sign-in and configure the Supabase
 email template to include `{{ .Token }}` so users receive the six-digit code
 requested by `POST /auth/otp/request`. Configure Supabase Auth's rate limits
 and CAPTCHA before exposing OTP requests publicly.
+
+The API allows local frontend origins on ports 5173 by default. Set
+`CORS_ORIGINS` to a comma-separated list of exact frontend origins for other
+local ports or deployed environments.
 
 `JWT_SECRET` is also used by the existing auth feature, so changing it
 invalidates existing JWTs. Do not use a placeholder or share a secret between

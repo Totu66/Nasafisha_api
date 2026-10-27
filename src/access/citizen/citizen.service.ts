@@ -32,14 +32,15 @@ export class CitizenService {
     return { email };
   }
 
-  async verifyOtp(rawEmail: string, code: string) {
+  async verifyOtp(rawEmail: string, code: string, rawName?: string) {
     const email = await this.email.verifyCode(
       this.cleanEmail(rawEmail),
       code,
     );
+    const name = rawName?.trim();
     const account = await this.prisma.account.upsert({
       where: { email },
-      create: { email, role: ROLES.CITIZEN, name: 'Resident' },
+      create: { email, role: ROLES.CITIZEN, name: name || 'Resident' },
       update: {},
     });
 
@@ -58,7 +59,12 @@ export class CitizenService {
       );
     }
 
-    const user = { id: account.id, role: ROLES.CITIZEN, name: account.name };
+    const user = {
+      id: account.id,
+      role: ROLES.CITIZEN,
+      name: account.name,
+      email: account.email,
+    };
     const token = await this.tokens.sign(user, CITIZEN_SESSION_SECONDS);
     return { token, user };
   }

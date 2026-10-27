@@ -3,7 +3,7 @@ services:
   nest-db:
     image: postgres:13
     ports:
-      - 5432:5432
+      - '5433:5432'
     environment:
       POSTGRES_USER: root
       POSTGRES_PASSWORD: root123
@@ -13,7 +13,7 @@ services:
     networks:
       - nest_network
     healthcheck:
-      test: ['CMD-SHELL', 'pg_isready -U postgres -d nest -h localhost']
+      test: ['CMD-SHELL', 'pg_isready -U root -d nest -h localhost']
       interval: 10s # How often to run the check
       timeout: 5s # How long to wait for the check to return
       retries: 5 # How many times to retry before marking as unhealthy

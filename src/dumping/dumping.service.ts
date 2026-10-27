@@ -86,7 +86,12 @@ export class DumpingService {
       include: {
         reports: {
           orderBy: { createdAt: 'desc' },
-          select: { reference: true, note: true, createdAt: true },
+          select: {
+            reference: true,
+            note: true,
+            createdAt: true,
+            incident: { select: { zone: true } },
+          },
         },
         remediations: { orderBy: { createdAt: 'desc' } },
       },
@@ -96,6 +101,11 @@ export class DumpingService {
       id: site.id,
       name: site.name ?? 'Unnamed site',
       hotspot: site.hotspot,
+      zone: site.reports[0]?.incident.zone ?? 'Unassigned',
+      reportsCount: site.reportCount,
+      lat: site.lat,
+      lng: site.lng,
+      lastReportedAt: site.lastReportedAt,
       reports: site.reports,
       remediations: site.remediations.map((r) => ({
         id: r.id,
