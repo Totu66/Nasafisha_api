@@ -5,6 +5,7 @@ import { AccessGuard } from './access.guard';
 import { AuditService } from './audit.service';
 import { CitizenController } from './citizen/citizen.controller';
 import { CitizenService } from './citizen/citizen.service';
+import { EmailService } from './email.service';
 import {
   CrewController,
   SupervisorController,
@@ -25,6 +26,7 @@ import { TokenService } from './token.service';
     TokenService,
     AuditService,
     SmsService,
+    EmailService,
     CitizenService,
     CrewService,
     AccessGuard,

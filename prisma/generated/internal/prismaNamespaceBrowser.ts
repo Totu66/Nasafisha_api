@@ -57,7 +57,6 @@ export const ModelName = {
   InAppNotification: 'InAppNotification',
   SmsLog: 'SmsLog',
   TrackingLink: 'TrackingLink',
-  PhoneOtp: 'PhoneOtp',
   AuditLog: 'AuditLog',
   SupervisorNotice: 'SupervisorNotice',
   Incident: 'Incident',
@@ -177,18 +176,6 @@ export const TrackingLinkScalarFieldEnum = {
 } as const
 
 export type TrackingLinkScalarFieldEnum = (typeof TrackingLinkScalarFieldEnum)[keyof typeof TrackingLinkScalarFieldEnum]
-
-
-export const PhoneOtpScalarFieldEnum = {
-  phone: 'phone',
-  codeHash: 'codeHash',
-  expiresAt: 'expiresAt',
-  failedAttempts: 'failedAttempts',
-  lockedUntil: 'lockedUntil',
-  updatedAt: 'updatedAt'
-} as const
-
-export type PhoneOtpScalarFieldEnum = (typeof PhoneOtpScalarFieldEnum)[keyof typeof PhoneOtpScalarFieldEnum]
 
 
 export const AuditLogScalarFieldEnum = {

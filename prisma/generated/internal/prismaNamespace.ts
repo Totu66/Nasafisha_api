@@ -403,7 +403,6 @@ export const ModelName = {
   InAppNotification: 'InAppNotification',
   SmsLog: 'SmsLog',
   TrackingLink: 'TrackingLink',
-  PhoneOtp: 'PhoneOtp',
   AuditLog: 'AuditLog',
   SupervisorNotice: 'SupervisorNotice',
   Incident: 'Incident',
@@ -437,7 +436,7 @@ export type TypeMap<ExtArgs extends runtime.Types.Extensions.InternalArgs = runt
     omit: GlobalOmitOptions
   }
   meta: {
-    modelProps: "user" | "bookmark" | "account" | "inAppNotification" | "smsLog" | "trackingLink" | "phoneOtp" | "auditLog" | "supervisorNotice" | "incident" | "report" | "ticket" | "ticketEvent" | "closureApproval" | "dumpingSite" | "dumpingRemediation" | "vehicle" | "positionLog" | "rejectedPosition" | "route" | "deviationAlert" | "routeAudit" | "efficiencyIndex" | "syncedAction" | "syncConflict"
+    modelProps: "user" | "bookmark" | "account" | "inAppNotification" | "smsLog" | "trackingLink" | "auditLog" | "supervisorNotice" | "incident" | "report" | "ticket" | "ticketEvent" | "closureApproval" | "dumpingSite" | "dumpingRemediation" | "vehicle" | "positionLog" | "rejectedPosition" | "route" | "deviationAlert" | "routeAudit" | "efficiencyIndex" | "syncedAction" | "syncConflict"
     txIsolationLevel: TransactionIsolationLevel
   }
   model: {
@@ -882,80 +881,6 @@ export type TypeMap<ExtArgs extends runtime.Types.Extensions.InternalArgs = runt
         count: {
           args: Prisma.TrackingLinkCountArgs<ExtArgs>
           result: runtime.Types.Utils.Optional<Prisma.TrackingLinkCountAggregateOutputType> | number
-        }
-      }
-    }
-    PhoneOtp: {
-      payload: Prisma.$PhoneOtpPayload<ExtArgs>
-      fields: Prisma.PhoneOtpFieldRefs
-      operations: {
-        findUnique: {
-          args: Prisma.PhoneOtpFindUniqueArgs<ExtArgs>
-          result: runtime.Types.Utils.PayloadToResult<Prisma.$PhoneOtpPayload> | null
-        }
-        findUniqueOrThrow: {
-          args: Prisma.PhoneOtpFindUniqueOrThrowArgs<ExtArgs>
-          result: runtime.Types.Utils.PayloadToResult<Prisma.$PhoneOtpPayload>
-        }
-        findFirst: {
-          args: Prisma.PhoneOtpFindFirstArgs<ExtArgs>
-          result: runtime.Types.Utils.PayloadToResult<Prisma.$PhoneOtpPayload> | null
-        }
-        findFirstOrThrow: {
-          args: Prisma.PhoneOtpFindFirstOrThrowArgs<ExtArgs>
-          result: runtime.Types.Utils.PayloadToResult<Prisma.$PhoneOtpPayload>
-        }
-        findMany: {
-          args: Prisma.PhoneOtpFindManyArgs<ExtArgs>
-          result: runtime.Types.Utils.PayloadToResult<Prisma.$PhoneOtpPayload>[]
-        }
-        create: {
-          args: Prisma.PhoneOtpCreateArgs<ExtArgs>
-          result: runtime.Types.Utils.PayloadToResult<Prisma.$PhoneOtpPayload>
-        }
-        createMany: {
-          args: Prisma.PhoneOtpCreateManyArgs<ExtArgs>
-          result: BatchPayload
-        }
-        createManyAndReturn: {
-          args: Prisma.PhoneOtpCreateManyAndReturnArgs<ExtArgs>
-          result: runtime.Types.Utils.PayloadToResult<Prisma.$PhoneOtpPayload>[]
-        }
-        delete: {
-          args: Prisma.PhoneOtpDeleteArgs<ExtArgs>
-          result: runtime.Types.Utils.PayloadToResult<Prisma.$PhoneOtpPayload>
-        }
-        update: {
-          args: Prisma.PhoneOtpUpdateArgs<ExtArgs>
-          result: runtime.Types.Utils.PayloadToResult<Prisma.$PhoneOtpPayload>
-        }
-        deleteMany: {
-          args: Prisma.PhoneOtpDeleteManyArgs<ExtArgs>
-          result: BatchPayload
-        }
-        updateMany: {
-          args: Prisma.PhoneOtpUpdateManyArgs<ExtArgs>
-          result: BatchPayload
-        }
-        updateManyAndReturn: {
-          args: Prisma.PhoneOtpUpdateManyAndReturnArgs<ExtArgs>
-          result: runtime.Types.Utils.PayloadToResult<Prisma.$PhoneOtpPayload>[]
-        }
-        upsert: {
-          args: Prisma.PhoneOtpUpsertArgs<ExtArgs>
-          result: runtime.Types.Utils.PayloadToResult<Prisma.$PhoneOtpPayload>
-        }
-        aggregate: {
-          args: Prisma.PhoneOtpAggregateArgs<ExtArgs>
-          result: runtime.Types.Utils.Optional<Prisma.AggregatePhoneOtp>
-        }
-        groupBy: {
-          args: Prisma.PhoneOtpGroupByArgs<ExtArgs>
-          result: runtime.Types.Utils.Optional<Prisma.PhoneOtpGroupByOutputType>[]
-        }
-        count: {
-          args: Prisma.PhoneOtpCountArgs<ExtArgs>
-          result: runtime.Types.Utils.Optional<Prisma.PhoneOtpCountAggregateOutputType> | number
         }
       }
     }
@@ -2415,18 +2340,6 @@ export const TrackingLinkScalarFieldEnum = {
 export type TrackingLinkScalarFieldEnum = (typeof TrackingLinkScalarFieldEnum)[keyof typeof TrackingLinkScalarFieldEnum]
 
 
-export const PhoneOtpScalarFieldEnum = {
-  phone: 'phone',
-  codeHash: 'codeHash',
-  expiresAt: 'expiresAt',
-  failedAttempts: 'failedAttempts',
-  lockedUntil: 'lockedUntil',
-  updatedAt: 'updatedAt'
-} as const
-
-export type PhoneOtpScalarFieldEnum = (typeof PhoneOtpScalarFieldEnum)[keyof typeof PhoneOtpScalarFieldEnum]
-
-
 export const AuditLogScalarFieldEnum = {
   id: 'id',
   action: 'action',
@@ -2971,7 +2884,6 @@ export type GlobalOmitConfig = {
   inAppNotification?: Prisma.InAppNotificationOmit
   smsLog?: Prisma.SmsLogOmit
   trackingLink?: Prisma.TrackingLinkOmit
-  phoneOtp?: Prisma.PhoneOtpOmit
   auditLog?: Prisma.AuditLogOmit
   supervisorNotice?: Prisma.SupervisorNoticeOmit
   incident?: Prisma.IncidentOmit

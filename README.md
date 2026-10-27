@@ -29,8 +29,9 @@
 ## Access API
 
 The access feature is isolated in `src/access/`; the existing email/password
-auth, bookmark, and user routes are unchanged. It adds citizen OTP routes,
-crew PIN login, and supervisor crew-PIN reset routes:
+auth, bookmark, and user routes are unchanged. Citizen OTP sign-in sends and
+verifies email codes through Supabase Auth. It also adds crew PIN login and
+supervisor crew-PIN reset routes:
 
 - `POST /auth/otp/request`
 - `POST /auth/otp/verify`
@@ -38,14 +39,32 @@ crew PIN login, and supervisor crew-PIN reset routes:
 - `GET /supervisor/crew-accounts` (field supervisor token required)
 - `POST /supervisor/crew-accounts/:id/pin` (field supervisor token required)
 
+Citizen OTP requests and verification use an email address:
+
+```json
+{ "email": "resident@example.com" }
+```
+
+Verification also requires the six-digit code sent by Supabase:
+
+```json
+{ "email": "resident@example.com", "code": "123456" }
+```
+
 Copy `.env.example` to `.env` as a reference, then supply a unique, strong
-`JWT_SECRET` and the database/SMS settings for the environment. `JWT_SECRET`
-is also used by the existing auth feature, so changing it invalidates existing
-JWTs. Do not use a placeholder or share a secret between deployments. When
-`SMS_API_KEY` is unset outside production, OTP messages are written to the
-server log for local testing; production requires SMS configuration.
-OTP request throttling is not included yet and should be added before exposing
-the endpoint publicly.
+`JWT_SECRET`, `DATABASE_URL`, `SUPABASE_URL`, and Supabase key. Citizen OTP
+sign-in uses Supabase Auth; enable email sign-in and configure the Supabase
+email template to include `{{ .Token }}` so users receive the six-digit code
+requested by `POST /auth/otp/request`. Configure Supabase Auth's rate limits
+and CAPTCHA before exposing OTP requests publicly.
+
+`JWT_SECRET` is also used by the existing auth feature, so changing it
+invalidates existing JWTs. Do not use a placeholder or share a secret between
+deployments. The Supabase service-role key is used only by the backend and must
+never be exposed to a client. SMS remains in use for report status
+notifications; configure the `SMS_*` settings if those notifications should
+be delivered. Account phone numbers remain available for those notifications;
+they are not used to sign in.
 
 The access schema additions are in `prisma/schema.prisma`, with an additive
 migration at `prisma/migrations/20261014120000_add_access_models`. Review and

@@ -1,4 +1,5 @@
 import {
+  IsEmail,
   IsNotEmpty,
   IsOptional,
   IsString,
@@ -6,15 +7,13 @@ import {
 } from 'class-validator';
 
 export class RequestOtpDto {
-  @IsString()
-  @IsNotEmpty()
-  phone: string;
+  @IsEmail()
+  email: string;
 }
 
 export class VerifyOtpDto {
-  @IsString()
-  @IsNotEmpty()
-  phone: string;
+  @IsEmail()
+  email: string;
 
   @IsString()
   @Matches(/^\d{6}$/, { message: 'The code has 6 digits' })

@@ -9,12 +9,12 @@ export class CitizenController {
   @Post('request')
   @HttpCode(200)
   request(@Body() dto: RequestOtpDto) {
-    return this.citizen.requestOtp(dto.phone);
+    return this.citizen.requestOtp(dto.email);
   }
 
   @Post('verify')
   @HttpCode(200)
   verify(@Body() dto: VerifyOtpDto) {
-    return this.citizen.verifyOtp(dto.phone, dto.code);
+    return this.citizen.verifyOtp(dto.email, dto.code);
   }
 }

@@ -1,5 +1,6 @@
 import { Module } from '@nestjs/common';
 import { DumpingModule } from '../dumping/dumping.module';
+import { FleetModule } from '../fleet/fleet.module';
 import { NotificationsModule } from '../notifications/notifications.module';
 import { PrismaModule } from '../prisma/prisma.module';
 import { StorageModule } from '../storage/storage.module';
@@ -15,7 +16,13 @@ import {
 import { TicketsService } from './tickets.service';
 
 @Module({
-  imports: [PrismaModule, StorageModule, DumpingModule, NotificationsModule],
+  imports: [
+    PrismaModule,
+    StorageModule,
+    DumpingModule,
+    FleetModule,
+    NotificationsModule,
+  ],
   controllers: [
     ReportsController,
     TicketsController,

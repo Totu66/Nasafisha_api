@@ -48,11 +48,6 @@ export type SmsLog = Prisma.SmsLogModel
  */
 export type TrackingLink = Prisma.TrackingLinkModel
 /**
- * Model PhoneOtp
- * 
- */
-export type PhoneOtp = Prisma.PhoneOtpModel
-/**
  * Model AuditLog
  * 
  */
