@@ -59,13 +59,16 @@ Registration may also supply a display name during verification:
 ```
 
 Copy `.env.example` to `.env` as a reference, then supply a unique, strong
-`JWT_SECRET`, `DATABASE_URL`, `SUPABASE_URL`, and Supabase key. Citizen OTP
+`JWT_SECRET`, `DATABASE_URL`, `DIRECT_URL`, `SUPABASE_URL`, and Supabase key.
+Use Supabase's transaction pooler URL for `DATABASE_URL` and its session
+pooler or direct connection URL for `DIRECT_URL`; Prisma CLI migrations use
+`DIRECT_URL`. Citizen OTP
 sign-in uses Supabase Auth; enable email sign-in and configure the Supabase
 email template to include `{{ .Token }}` so users receive the six-digit code
 requested by `POST /auth/otp/request`. Configure Supabase Auth's rate limits
 and CAPTCHA before exposing OTP requests publicly.
 
-The API allows local frontend origins on ports 5173 by default. Set
+The API allows local frontend origins on ports 5173 and 5174 by default. Set
 `CORS_ORIGINS` to a comma-separated list of exact frontend origins for other
 local ports or deployed environments.
 

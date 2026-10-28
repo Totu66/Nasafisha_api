@@ -23,6 +23,7 @@ export class AdminAuthController {
     ROLES.OPERATIONS_MANAGER,
     ROLES.EXECUTIVE,
     ROLES.COUNTY_ICT_ADMIN,
+    ROLES.CONTRACTOR,
   )
   me(@CurrentUser() user: SessionUser) {
     return user;

@@ -45,3 +45,16 @@ export class ResetPinDto {
   @Matches(/^\d{4,6}$/, { message: 'PIN must be 4 to 6 digits' })
   pin: string;
 }
+
+export class ContractorLoginDto {
+  @IsEmail()
+  email: string;
+
+  @IsString()
+  @IsNotEmpty()
+  password: string;
+
+  @IsOptional()
+  @IsString()
+  deviceId?: string;
+}

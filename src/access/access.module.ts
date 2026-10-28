@@ -11,6 +11,8 @@ import {
   SupervisorController,
 } from './crew/crew.controller';
 import { CrewService } from './crew/crew.service';
+import { ContractorController } from './contractor/contractor.controller';
+import { ContractorService } from './contractor/contractor.service';
 import { SmsService } from './sms.service';
 import { TokenService } from './token.service';
 
@@ -21,6 +23,7 @@ import { TokenService } from './token.service';
     CitizenController,
     CrewController,
     SupervisorController,
+    ContractorController,
   ],
   providers: [
     TokenService,
@@ -29,6 +32,7 @@ import { TokenService } from './token.service';
     EmailService,
     CitizenService,
     CrewService,
+    ContractorService,
     AccessGuard,
   ],
   exports: [TokenService, AuditService, SmsService, AccessGuard],

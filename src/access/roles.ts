@@ -5,6 +5,7 @@ export const ROLES = {
   OPERATIONS_MANAGER: 'operations_manager',
   EXECUTIVE: 'executive',
   COUNTY_ICT_ADMIN: 'county_ict_admin',
+  CONTRACTOR: 'contractor',
 } as const;
 
 export type Role = (typeof ROLES)[keyof typeof ROLES];
